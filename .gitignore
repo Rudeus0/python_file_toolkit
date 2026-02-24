@@ -3,7 +3,7 @@
 
 
 # Virtual environment
-venv/
+.venv/
 
 # Python cache
 __pycache__/
@@ -11,3 +11,9 @@ __pycache__/
 
 # VS Code
 .vscode/
+
+#jupter
+.ipynb_checkpoints/
+
+#logs
+logs/
