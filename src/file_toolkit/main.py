@@ -1,8 +1,8 @@
-from utils.file_utils import catch_file_type, read_txt_file, read_csv_file 
+from .file_manager import catch_file_type, read_txt_file, read_csv_file
 
 def main():
     
-    file_path = input("Enter the file name:")
+    file_path = input("Enter the file name: ").strip()
     
     file_type = catch_file_type(file_path)
     
@@ -13,7 +13,7 @@ def main():
         read_csv_file(file_path)
     
     else:
-        print("unknown file type") 
+        print("Unknown file type. Supported file_type: .txt, .csv") 
     
     
     
