@@ -10,23 +10,21 @@ def catch_file_type(file_path: str) -> str | None:
     else:
         return None
     
-#
-def read_txt_file(file_path: str):
-    try:
-        with open(file_path, 'r') as file:
-            content = file.read()
-            print(content)  
-    except (FileNotFoundError, PermissionError) as e:
-        print(f'Error reading file {e}')
+#Reads the .txt file and return value as string 
+def read_txt_file(file_path: str) -> str:
+     with open(file_path, 'r') as file:
+        txt_data = file.read()
+        return txt_data  
     
     
-        
+#Reads the .csv file and return value as list 
 def read_csv_file(file_path: str):
-    try:
-        with open(file_path, 'r') as csv_file:
-            csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                print(row)
-    except (FileNotFoundError, PermissionError)  as e:
-        print(f'Error reading file{e}')
+    with open(file_path, 'r') as csv_file:
+        csv_data = []
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            csv_data.append(row)
+            return csv_data
+            
+   
     
