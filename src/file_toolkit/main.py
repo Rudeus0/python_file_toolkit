@@ -1,10 +1,25 @@
+import argparse
+import logging
 from .file_manager import catch_file_type, read_txt_file, read_csv_file
+
+
+
+
 
 def main():
     attempt = 0
     while attempt < 3:  # Retry up to 3 times for file-related errors
-    
-        file_path = input("Enter the file name: ").strip()   #.strip() is used to "prevent" extra space after file name enter
+            
+        parser = argparse.ArgumentParser(description='Python file Toolkit')
+        parser.add_argument("file", help="File Name")
+        args = parser.parse_args()
+        file_path = args.file
+        
+        
+                    # Get the path from argparse instead of input()
+                    # We use .strip() here just in case, though argparse usually handles this
+        
+        file_path = args.file.strip()  
         file_type = catch_file_type(file_path)
         
         if file_type is None:
@@ -21,8 +36,13 @@ def main():
                 if not data:
                     print("The file is empty")
                 else:
-                    print(data[0].keys())
-                    print(data[:5])
+                    print("\nCSV SUMMARY")
+                    print("-----------")
+                    print(f"Rows: {len(data)}")
+                    print(f"Columns: {len(data[0])}")
+                    print("\nColumn Names:")
+                    for col in data[0].keys():
+                        print(col)
                     break  # if file type is .csv and excuted to prevent infinte loop or extra loop break used
         except (PermissionError, FileNotFoundError, FileExistsError) as e:
             attempt += 1   
