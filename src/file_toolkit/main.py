@@ -8,21 +8,17 @@ from .file_manager import catch_file_type, read_txt_file, read_csv_file
 
 def main():
     attempt = 0
+    parser = argparse.ArgumentParser(description='Python file Toolkit')
+    parser.add_argument("file", help="File Name")   
+    args = parser.parse_args()             # Get the path from argparse instead of input() 
+    file_path = args.file.strip()          # We use .strip() here just in case, though argparse usually handles this
+           
     while attempt < 3:  # Retry up to 3 times for file-related errors
             
-        parser = argparse.ArgumentParser(description='Python file Toolkit')
-        parser.add_argument("file", help="File Name")
-        args = parser.parse_args()
-        file_path = args.file
-        
-        
-                    # Get the path from argparse instead of input()
-                    # We use .strip() here just in case, though argparse usually handles this
-        
-        file_path = args.file.strip()  
         file_type = catch_file_type(file_path)
         
         if file_type is None:
+            attempt += 1
             print("filetype nor found")
             continue   
         try:
